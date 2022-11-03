@@ -1,3 +1,3 @@
 <?php 
-echo "html code";
+echo "html codes";
 ?>
