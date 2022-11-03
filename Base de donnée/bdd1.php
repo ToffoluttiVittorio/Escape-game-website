@@ -1,4 +1,4 @@
 <?php 
 echo "html csodes";
-echo "<p>Rosemary</p>"
+echo "<p>Rosemary</p>";
 ?>
