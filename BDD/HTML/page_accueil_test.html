@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Titre de la page</title>
+    </head>
+    <body>
+        <form action="../BDD/PHP/Leaderboard.php" method="post" id="Joueur">
+            <legend>Joueur</legend>
+            <p><label>Tapez votre nom svp : <input id="nom" type="text" name="nom"></label></p>
+            <p><button id="joueur">Submit</button></p>
+        </form>
+    </body>
+    <script>
+        let joueur=document.getElementById('joueur');
+        let nom=document.getElementById('nom');
+        joueur.addEventListener('click',function(event){
+        event.preventDefault();});
+        nom.addEventListener('input',function(event){
+            console.log(nom);
+        })
+    </script>
+</html>
