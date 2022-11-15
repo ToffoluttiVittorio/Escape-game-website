@@ -5,21 +5,18 @@
         <title>Titre de la page</title>
     </head>
     <body>
-        <form action="../BDD/PHP/insc_joueurs.php" method="post" id="Joueur">
+        <form action="../PHP/insc_joueurs.php" method="post" id="Joueur">
             <legend>Joueur</legend>
             <p><label>Tapez votre nom svp : <input type="text" name="nom"></label></p>
             <p><button id="joueur">Submit</button></p>
         </form>
+        <iframe id="inlineFrameExample"
+        title="Inline Frame Example"
+        width="300"
+        height="200"
+        src="">
+        </iframe>
+
     </body>
-    <script>
-        let joueur=document.getElementById('joueur');
-        let nom=document.getElementById('nom');
-        joueur.addEventListener('click',function(event){
-            event.preventDefault();});
-        nom.addEventListener('input',function(event){
-            console.log(event);
-            console.log(nom.value);
-        });
-    </script>
-    <script src=""></script>
+    <script src="../JS/script1.js"></script>
 </html>
