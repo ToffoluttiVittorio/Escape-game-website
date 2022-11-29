@@ -4,13 +4,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
 	attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 //nous réalisons un fetch de la fonction  
-var data;
+var data = "nomtotoprenomtata";
 fetch('../PHP/json_point_request.php', {
-    method: 'post',
-    body: data
+	method: 'post',
+	body: data
   })
 	.then(r => r.json())
-	.then(r=> data=JSON.parse(r))
+	// .then(r=> JSON.parse(r))
 	.then(r => {console.log(r)})
-	.catch(console.error);
 console.log(data);
