@@ -9,14 +9,14 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 /////////////// CREATION OBJET ET MARQUEURS ///////////////
 
 let test1 = L.icon({
-    iconUrl: 'img/dollar.png',
+    iconUrl: 'image/dollar.png',
     iconSize: [38, 50]
 });
 
 let marker1 = L.marker([48, 2.28], {icon: test1});
 
 let test2 = L.icon({
-    iconUrl: 'img/code.png',
+    iconUrl: 'image/code.png',
     iconSize: [38, 50]
 });
 
@@ -49,7 +49,7 @@ let marker2 = L.marker([44, 2.28], {icon: test2});
 
 let marqueur = ([marker1, marker2]);
 
-let malika = [[1, 'img/dollar.png'],[2, 'img/code.png']];
+let malika = [[1, 'image/dollar.png'],[2, 'image/code.png']];
 
 ////////////////////// Fonction qui déroule les étapes du jeu /////////////////////////////
 
