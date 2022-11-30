@@ -47,7 +47,7 @@ let marker2 = L.marker([44, 2.28], {icon: test2});
 // let compteurblock = 0;
 
 
-let marqueur = L.layerGroup([marker1, marker2]);
+let marqueur = ([marker1, marker2]);
 
 let malika = [[1, 'img/dollar.png'],[2, 'img/code.png']];
 
@@ -59,9 +59,9 @@ let compteur = 0;
 let mark = marqueur[compteur];
 
 function zoom(){
-    console.log(mark[0]);
+    console.log(map.getZoom());
     if(compteur == marqueur.length){
-        console.log("Le jeu est finito")
+        console.log("Le jeu est finito");
         return
     }
     else{
@@ -74,7 +74,6 @@ function zoom(){
         }
         else if (malika[compteur][0] == 2){
             console.log("test2");
-            console.log(compteur);
             mark.on("click",cliquercode);
         }
         else if (malika[compteur][0] == 3){
@@ -91,16 +90,15 @@ function zoom(){
 function cliquer(){
     document.getElementById("image").src=malika[compteur][1];
     map.removeLayer(mark);
-    compteur ++;
     mark.removeEventListener("click",cliquer);
+    compteur ++;
 }
 
 function cliquercode(){
-    console.log("compteur = ", compteur)
     document.getElementById("image").src=malika[compteur][1];
     map.removeLayer(mark);
-    compteur ++;
     mark.removeEventListener("click",cliquercode);
+    compteur ++;
 }
 
 function cliquerbloquer(){
