@@ -6,5 +6,4 @@
         $tableau[] = $ligne;
       }
     echo json_encode($tableau);
-    //code destinée à afficher les scores des joueurs dans une page PHP simple, afin de mettre en ligne dans les 
 ?>
