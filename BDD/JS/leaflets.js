@@ -7,49 +7,28 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 /////////////// CREATION ICONS ///////////////
-
-// let test1 = L.icon({
-//     iconUrl: '../img/dollar.png',
-//     iconSize: [38, 50]
-// });
-
-// let marker1 = L.marker([48, 2.28], {icon: test1});
-
-// let test2 = L.icon({
-//     iconUrl: '../img/code.png',
-//     iconSize: [38, 50]
-// });
-
-// let marker2 = L.marker([44, 2.28], {icon: test2});
-
-// let test3 = L.icon({
-//     iconUrl: 'img/dollar.png',
-//     iconSize: [38, 50],
-// });
-
-// let blk1 = L.icon({
-//     iconUrl: 'img/code.png',
-//     iconSize: [38, 50],
-// });
-
-// let blk2 = L.icon({
-//     iconUrl: 'img/cadena.png',
-//     iconSize: [38, 50],
-// });
-
-
-// let groupMarker = L.FeatureGroup();
-// let icons = [mark1, mark2];
-// let blocke = ["", blk1, blk2];
-// let source = ["img/arsenal.jpg","img/pb.jpg","img/arriere_flamme.jpg"];
-// let imgcompteur = ['', 'img/code.png', 'img/cadena.png'];
-// let compteur = 0;
-// let compteurblock = 0;
-
-
-// let marqueur = [marker1, marker2];
-// let group = L.featureGroup()
-// let malika = [[1, '../img/dollar.png'],[2, '../img/.png']];
+//nous réalisons un fetch de la fonction  
+var oisif=document.getElementById('check1');
+oisif.addEventListener("input", function(){
+	var data = {"data":1};// but ici (si on fait plusieurs fetch c'est de demander au fichier PHP de renvoyer que ce qui est demandée et pas le reste)
+	fetch('../PHP/json_point_request.php', {
+		method: 'post',
+		body: JSON.stringify(data)
+ 	 })
+		.then(r => r.json())
+		.then(r=> {
+			for (var i=0; i<r.length; i++){
+				var lat = r[i]["lat"];//selection de la colonne lat
+				var long =r[i]["long"];//selection de la colonne long
+				var mark = L.marker([lat, long]).addTo(map);
+				if (r[i]["popup"]!=""){//test de popup pour voir que cela marche
+					mark.bindPopup(r[i]["popup"]).openPopup();
+					console.log(r[i]["popup"]);//vérifier que cela marche (j'ai mis un popup à un seul endroit si tu utilises le fichier .sql que je t'ai envoyée (tu peux aussi voir tous les colonnes SQL))
+				}
+				}
+			})
+		.then(r => console.log(r));//inutile je pense mais bien pour voir tous les erreurs si jamais le fetch n'est pas bon (bon en général ça vient du PHP)
+	})
 
 
 ////////////////////// Fonction qui créer le marqueurs ///////////////////
@@ -113,25 +92,3 @@ function cliquercode(){
 function cliquerbloquer(){
 
 }
-//nous réalisons un fetch de la fonction  
-var oisif=document.getElementById('check1');
-oisif.addEventListener("input", function(){
-	var data = {"data":1};// but ici (si on fait plusieurs fetch c'est de demander au fichier PHP de renvoyer que ce qui est demandée et pas le reste)
-	fetch('../PHP/json_point_request.php', {
-		method: 'post',
-		body: JSON.stringify(data)
- 	 })
-		.then(r => r.json())
-		.then(r=> {
-			for (var i=0; i<r.length; i++){
-				var lat = r[i]["lat"];//selection de la colonne lat
-				var long =r[i]["long"];//selection de la colonne long
-				var mark = L.marker([lat, long]).addTo(map);
-				if (r[i]["popup"]!=""){//test de popup pour voir que cela marche
-					mark.bindPopup(r[i]["popup"]).openPopup();
-					console.log(r[i]["popup"]);//vérifier que cela marche (j'ai mis un popup à un seul endroit si tu utilises le fichier .sql que je t'ai envoyée (tu peux aussi voir tous les colonnes SQL))
-				}
-				}
-			})
-		.then(r => console.log(r));//inutile je pense mais bien pour voir tous les erreurs si jamais le fetch n'est pas bon (bon en général ça vient du PHP)
-	})
