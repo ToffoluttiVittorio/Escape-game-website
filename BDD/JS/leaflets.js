@@ -8,8 +8,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 /////////////// CREATION ICONS ///////////////
 //nous réalisons un fetch de la fonction  
-var oisif=document.getElementById('check1');
-oisif.addEventListener("input", function(){
+// var oisif=document.getElementById('check1');
+// oisif.addEventListener("input", function(){
 	var data = {"data":1};// but ici (si on fait plusieurs fetch c'est de demander au fichier PHP de renvoyer que ce qui est demandée et pas le reste)
 	fetch('../PHP/json_point_request.php', {
 		method: 'post',
@@ -28,7 +28,9 @@ oisif.addEventListener("input", function(){
 				}
 			})
 		.then(r => console.log(r));//inutile je pense mais bien pour voir tous les erreurs si jamais le fetch n'est pas bon (bon en général ça vient du PHP)
-	})
+	// })
+console.log (lat,long);
+	
 
 
 ////////////////////// Fonction qui créer le marqueurs ///////////////////

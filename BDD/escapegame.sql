@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 01, 2022 at 01:20 PM
+-- Generation Time: Dec 01, 2022 at 05:06 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.1
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `escapegame`
 --
-CREATE DATABASE IF NOT EXISTS `escapegame` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `escapegame`;
 
 -- --------------------------------------------------------
 
@@ -34,8 +32,6 @@ CREATE TABLE `icones` (
   `url` varchar(500) NOT NULL,
   `taille_long` int(11) NOT NULL,
   `taille_larg` int(11) NOT NULL,
-  `pos_lat` double NOT NULL,
-  `pos_lon` double NOT NULL,
   `id_icone` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -43,10 +39,10 @@ CREATE TABLE `icones` (
 -- Dumping data for table `icones`
 --
 
-INSERT INTO `icones` (`url`, `taille_long`, `taille_larg`, `pos_lat`, `pos_lon`, `id_icone`) VALUES
-('https://cdn-icons-png.flaticon.com/512/1355/1355876.png', 50, 50, 0, 0, 1),
-('https://cdn-icons-png.flaticon.com/512/1355/1355876.png', 50, 50, 0, 0, 2),
-('https://cdn-icons-png.flaticon.com/512/1355/1355876.png', 50, 50, 0, 0, 3);
+INSERT INTO `icones` (`url`, `taille_long`, `taille_larg`, `id_icone`) VALUES
+('../img/dollar.png', 38, 50, 1),
+('../img/code.png', 38, 50, 2),
+('../img/cadena.png', 38, 50, 3);
 
 -- --------------------------------------------------------
 
@@ -91,9 +87,8 @@ CREATE TABLE `objet` (
 --
 
 INSERT INTO `objet` (`id_icone`, `minZoomVisible`, `depart`, `id_objet`, `code_objet`, `objet_bloque`, `id_point`, `popup`) VALUES
-(1, 13, 0, 1, 0, 0, 1, ''),
-(2, 13, 1, 2, 0, 0, 1, ''),
-(3, 13, 0, 3, 0, 0, 2, '<form action=\"../PHP/insc_joueurs.php\" method=\"post\" id=\"Joueur\">             <legend>Joueur</legend>             <p><label>Tapez votre nom svp : <input type=\"text\" id=\"nom\"></label></p>             <p><button id=\"joueur\">Submit</button></p>         </form>');
+(1, 0, 0, 1, 0, 0, 1, ''),
+(2, 0, 1, 2, 1, 0, 2, '<iframe id=\"inlineFrameExample\"\r\n    title=\"Inline Frame Example\"\r\n    width=\"300\"\r\n    height=\"100\"\r\n    src=\"../HTML/iframe_code.html\">\r\n</iframe>');
 
 -- --------------------------------------------------------
 
@@ -114,8 +109,15 @@ CREATE TABLE `objet_bloque_par_objet` (
 
 CREATE TABLE `objet_code` (
   `id_objet` int(11) NOT NULL,
-  `code objet` int(4) NOT NULL
+  `code_objet` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `objet_code`
+--
+
+INSERT INTO `objet_code` (`id_objet`, `code_objet`) VALUES
+(2, 1234);
 
 -- --------------------------------------------------------
 
@@ -134,8 +136,8 @@ CREATE TABLE `point` (
 --
 
 INSERT INTO `point` (`lat`, `long`, `id_point`) VALUES
-(48.2448, 2.0453, 1),
-(48.2449, 2.0454, 2);
+(48.8926, 2.28785, 1),
+(48.889, 2.28789, 2);
 
 --
 -- Indexes for dumped tables
