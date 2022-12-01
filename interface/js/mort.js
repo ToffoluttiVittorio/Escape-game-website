@@ -6,17 +6,17 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-/////////////// CREATION OBJET ET MARQUEURS ///////////////
+/////////////// CREATION ICONS ///////////////
 
 let test1 = L.icon({
-    iconUrl: 'img/dollar.png',
+    iconUrl: '../img/dollar.png',
     iconSize: [38, 50]
 });
 
 let marker1 = L.marker([48, 2.28], {icon: test1});
 
 let test2 = L.icon({
-    iconUrl: 'img/code.png',
+    iconUrl: '../img/code.png',
     iconSize: [38, 50]
 });
 
@@ -47,26 +47,34 @@ let marker2 = L.marker([44, 2.28], {icon: test2});
 // let compteurblock = 0;
 
 
-let marqueur = L.layerGroup([marker1, marker2]);
+let marqueur = [marker1, marker2];
+let group = L.featureGroup()
+let malika = [[1, '../img/dollar.png'],[2, '../img/.png']];
 
-let malika = [[1, 'img/dollar.png'],[2, 'img/code.png']];
+
+////////////////////// Fonction qui créer le marqueurs ///////////////////
+
+function creation_marqueur(){
+    
+}
 
 ////////////////////// Fonction qui déroule les étapes du jeu /////////////////////////////
 
 map.on("zoom",zoom);
 
 let compteur = 0;
-let mark = marqueur[compteur];
+let mark = marqueur[compteur]
 
 function zoom(){
-    console.log(mark[0]);
+    console.log(map.getZoom(),compteur);
     if(compteur == marqueur.length){
-        console.log("Le jeu est finito")
+        console.log("Le jeu est finito");
         return
     }
     else{
-    if(map.getZoom() >= 8){
-        mark.addTo(map);
+    if(map.getZoom() >=6){
+        mark.addTo(group);
+        group.addTo(map);
 
         if (malika[compteur][0] == 1){
             console.log("test1");
@@ -74,7 +82,6 @@ function zoom(){
         }
         else if (malika[compteur][0] == 2){
             console.log("test2");
-            console.log(compteur);
             mark.on("click",cliquercode);
         }
         else if (malika[compteur][0] == 3){
@@ -83,24 +90,24 @@ function zoom(){
         }
     }
     else{
-        map.removeLayer(mark);
+        group.clearLayers();
     }
 }
 }
 
 function cliquer(){
     document.getElementById("image").src=malika[compteur][1];
-    map.removeLayer(mark);
-    compteur ++;
+    group.clearLayers();
     mark.removeEventListener("click",cliquer);
+    compteur ++;
+    mark = L.marker([44, 2.28], {icon: test2});
 }
 
 function cliquercode(){
-    console.log("compteur = ", compteur)
     document.getElementById("image").src=malika[compteur][1];
-    map.removeLayer(mark);
-    compteur ++;
+    group.clearLayers();
     mark.removeEventListener("click",cliquercode);
+    compteur ++;
 }
 
 function cliquerbloquer(){
