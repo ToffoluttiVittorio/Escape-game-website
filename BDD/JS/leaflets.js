@@ -4,12 +4,24 @@ L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
 	attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 //nous réalisons un fetch de la fonction  
-var data = "nomtotoprenomtata";
-fetch('../PHP/json_point_request.php', {
-	method: 'post',
-	body: data
-  })
-	.then(r => r.json())
-	// .then(r=> JSON.parse(r))
-	.then(r => {console.log(r)})
-console.log(data);
+var oisif=document.getElementById('check1');
+oisif.addEventListener("input", function(){
+	var data = {"data":1};
+	fetch('../PHP/json_point_request.php', {
+		method: 'post',
+		body: JSON.stringify(data)
+ 	 })
+		.then(r => r.json())
+		.then(r=> {
+			for (var i=0; i<r.length; i++){
+				var lat = r[i]["lat"];
+				var long =r[i]["long"];
+				var mark = L.marker([lat, long]).addTo(map);
+				if (r[i]["popup"]!=""){
+					mark.bindPopup(r[i]["popup"]).openPopup();
+					console.log(r[i]["popup"]);
+				}
+				}
+			})
+		.then(r => console.log(r));
+	})
