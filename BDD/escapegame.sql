@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 01, 2022 at 05:06 PM
+-- Generation Time: Dec 02, 2022 at 04:42 PM
 -- Server version: 5.7.24
--- PHP Version: 7.4.1
+-- PHP Version: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,28 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `escapegame`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `icones`
---
-
-CREATE TABLE `icones` (
-  `url` varchar(500) NOT NULL,
-  `taille_long` int(11) NOT NULL,
-  `taille_larg` int(11) NOT NULL,
-  `id_icone` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `icones`
---
-
-INSERT INTO `icones` (`url`, `taille_long`, `taille_larg`, `id_icone`) VALUES
-('../img/dollar.png', 38, 50, 1),
-('../img/code.png', 38, 50, 2),
-('../img/cadena.png', 38, 50, 3);
 
 -- --------------------------------------------------------
 
@@ -72,94 +49,32 @@ INSERT INTO `nom_joueur` (`id_joueur`, `score`) VALUES
 --
 
 CREATE TABLE `objet` (
-  `id_icone` int(11) NOT NULL,
-  `minZoomVisible` int(11) NOT NULL,
-  `depart` tinyint(1) NOT NULL,
   `id_objet` int(11) NOT NULL,
-  `code_objet` tinyint(1) NOT NULL,
-  `objet_bloque` tinyint(1) NOT NULL,
-  `id_point` int(11) NOT NULL,
-  `popup` varchar(10000) NOT NULL
+  `longitude` double NOT NULL,
+  `latitude` double NOT NULL,
+  `ID_type` int(11) NOT NULL,
+  `URL_image` varchar(1000) NOT NULL,
+  `Code` int(11) NOT NULL,
+  `objet_bloquee` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `objet`
 --
 
-INSERT INTO `objet` (`id_icone`, `minZoomVisible`, `depart`, `id_objet`, `code_objet`, `objet_bloque`, `id_point`, `popup`) VALUES
-(1, 0, 0, 1, 0, 0, 1, ''),
-(2, 0, 1, 2, 1, 0, 2, '<iframe id=\"inlineFrameExample\"\r\n    title=\"Inline Frame Example\"\r\n    width=\"300\"\r\n    height=\"100\"\r\n    src=\"../HTML/iframe_code.html\">\r\n</iframe>');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `objet_bloque_par_objet`
---
-
-CREATE TABLE `objet_bloque_par_objet` (
-  `indice` text NOT NULL,
-  `id_objet` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `objet_code`
---
-
-CREATE TABLE `objet_code` (
-  `id_objet` int(11) NOT NULL,
-  `code_objet` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `objet_code`
---
-
-INSERT INTO `objet_code` (`id_objet`, `code_objet`) VALUES
-(2, 1234);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `point`
---
-
-CREATE TABLE `point` (
-  `lat` double NOT NULL,
-  `long` double NOT NULL,
-  `id_point` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `point`
---
-
-INSERT INTO `point` (`lat`, `long`, `id_point`) VALUES
-(48.8926, 2.28785, 1),
-(48.889, 2.28789, 2);
+INSERT INTO `objet` (`id_objet`, `longitude`, `latitude`, `ID_type`, `URL_image`, `Code`, `objet_bloquee`) VALUES
+(1, 0, 0, 0, '', 0, 0),
+(2, 0, 0, 0, '', 0, 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `icones`
---
-ALTER TABLE `icones`
-  ADD PRIMARY KEY (`id_icone`);
-
---
 -- Indexes for table `objet`
 --
 ALTER TABLE `objet`
   ADD PRIMARY KEY (`id_objet`);
-
---
--- Indexes for table `point`
---
-ALTER TABLE `point`
-  ADD PRIMARY KEY (`id_point`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
