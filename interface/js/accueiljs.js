@@ -4,13 +4,7 @@ let joueur = document.getElementById('joueur');
 boutonjouer.addEventListener("click", clickjouer);
 
 
-function clickjouer(){
-    location.href = "leaflet.html";
+function clickjouer(e){
     console.log(joueur.value);
-    let id_joueur={"joueur":joueur.value};
-    fetch('../BDD/PHP/insc_joueurs.php', {
-        method: 'post',
-        body: JSON.stringify(id_joueur)
-      })
 }
 
