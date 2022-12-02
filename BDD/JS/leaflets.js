@@ -23,74 +23,74 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				var mark = L.marker([lat, long]).addTo(map);
 				if (r[i]["popup"]!=""){//test de popup pour voir que cela marche
 					mark.bindPopup(r[i]["popup"]).openPopup();
-					console.log(r[i]["popup"]);//vérifier que cela marche (j'ai mis un popup à un seul endroit si tu utilises le fichier .sql que je t'ai envoyée (tu peux aussi voir tous les colonnes SQL))
+					// console.log(r[i]["popup"]);//vérifier que cela marche (j'ai mis un popup à un seul endroit si tu utilises le fichier .sql que je t'ai envoyée (tu peux aussi voir tous les colonnes SQL))
 				}
 				}
 			})
-		.then(r => console.log(r));//inutile je pense mais bien pour voir tous les erreurs si jamais le fetch n'est pas bon (bon en général ça vient du PHP)
+		// .then(r => console.log(r));//inutile je pense mais bien pour voir tous les erreurs si jamais le fetch n'est pas bon (bon en général ça vient du PHP)
 	// })
-console.log (lat,long);
 	
+console.log(mark);
+console.log("3");
 
+// ////////////////////// Fonction qui créer le marqueurs ///////////////////
 
-////////////////////// Fonction qui créer le marqueurs ///////////////////
-
-function creation_marqueur(){
+// function creation_marqueur(){
     
-}
+// }
 
-////////////////////// Fonction qui déroule les étapes du jeu /////////////////////////////
+// ////////////////////// Fonction qui déroule les étapes du jeu /////////////////////////////
 
-map.on("zoom",zoom);
+// map.on("zoom",zoom);
 
-let compteur = 0;
-let mark = marqueur[compteur]
+// let compteur = 0;
+// let mark = marqueur[compteur]
 
-function zoom(){
-    console.log(map.getZoom(),compteur);
-    if(compteur == marqueur.length){
-        console.log("Le jeu est finito");
-        return
-    }
-    else{
-    if(map.getZoom() >=6){
-        mark.addTo(group);
-        group.addTo(map);
+// function zoom(){
+//     console.log(map.getZoom(),compteur);
+//     if(compteur == marqueur.length){
+//         console.log("Le jeu est finito");
+//         return
+//     }
+//     else{
+//     if(map.getZoom() >=6){
+//         mark.addTo(group);
+//         group.addTo(map);
 
-        if (malika[compteur][0] == 1){
-            console.log("test1");
-            mark.on("click",cliquer);
-        }
-        else if (malika[compteur][0] == 2){
-            console.log("test2");
-            mark.on("click",cliquercode);
-        }
-        else if (malika[compteur][0] == 3){
-            console.log("test3");
-            mark.on("click",cliquerbloquer);
-        }
-    }
-    else{
-        group.clearLayers();
-    }
-}
-}
+//         if (malika[compteur][0] == 1){
+//             console.log("test1");
+//             mark.on("click",cliquer);
+//         }
+//         else if (malika[compteur][0] == 2){
+//             console.log("test2");
+//             mark.on("click",cliquercode);
+//         }
+//         else if (malika[compteur][0] == 3){
+//             console.log("test3");
+//             mark.on("click",cliquerbloquer);
+//         }
+//     }
+//     else{
+//         group.clearLayers();
+//     }
+// }
+// }
 
-function cliquer(){
-    document.getElementById("image").src=malika[compteur][1];
-    group.clearLayers();
-    mark.removeEventListener("click",cliquer);
-    compteur ++;
-    mark = L.marker([44, 2.28], {icon: test2});
-}
+// function cliquer(){
+//     document.getElementById("image").src=malika[compteur][1];
+//     group.clearLayers();
+//     mark.removeEventListener("click",cliquer);
+//     compteur ++;
+//     mark = L.marker([44, 2.28], {icon: test2});
+// }
 
-function cliquercode(){
-    document.getElementById("image").src=malika[compteur][1];
-    group.clearLayers();
-    mark.removeEventListener("click",cliquercode);
-    compteur ++;
-}
+// function cliquercode(){
+//     document.getElementById("image").src=malika[compteur][1];
+//     group.clearLayers();
+//     mark.removeEventListener("click",cliquercode);
+//     compteur ++;
+// }
 
-function cliquerbloquer(){
+// function cliquerbloquer(){
 
-}
+// }
