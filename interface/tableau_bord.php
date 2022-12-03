@@ -16,11 +16,10 @@
 
     
     <form action="accueil.html" method="get">
-        <input type="text" id="joueur" name="joueur">
-        <input id="boutonjouer" class="bouton" type="submit" value="Jouer">
+        <input id="boutonjouer" class="bouton" type="submit" value="Retour à l'accueil">
     </form>
     
-    <?php include(../BDD/PHP/PHP_tableau_joueur.php); ?>
+    <?php include("../BDD/PHP/PHP_tableau_joueur.php"); ?>
 </body>
 <script src="JS/accueiljs.js"></script>
 </html>
