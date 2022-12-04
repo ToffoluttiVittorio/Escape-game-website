@@ -57,9 +57,7 @@ function collecte(r){
 
 
 function jeux(tableau){
-
 	let url = tableau[4];
-	console.log(url);
 	let icone = L.icon({
 		iconUrl: url,
 		iconSize: [50, 50]
@@ -75,9 +73,7 @@ function jeux(tableau){
 		groupMarker.clearLayers();
 		map.removeEventListener("zoom", zoom);
 		i = i + 1;
-
 		objet(i);
-		// document.getElementById("image").src=malika[compteur][1];
 	}
 
 	function cliquerbloquer(){
@@ -108,27 +104,46 @@ function jeux(tableau){
 	function cliquercodant(){
 		console.log("cliquercodant");
 		groupMarker.removeLayer(mark);
+		let popup = document.createElement('div');
 		alert(tableau[8]);
-		groupMarker.addEventListener("click", cliquer)
+
+		groupMarker.bindPopup(popup);
+
+		popup.innerHTML = '<div> <p>'+tableau[10]+'</p> <form><p><input type="text" name="code" id="code" placeholder="Trouve le code ..."></p>'
+		+ '<p><input type="submit" value="vérifier" id="ok"></p> </form> </div>';
+		popup.addEventListener('submit', function(event){validform(event); })
+
+		function validform(e){
+			console.log("relou");
+			e.preventDefault();
+			var code = document.getElementById('code').value;
+			if (code == 2525){
+				groupMarker.unbindPopup(popup);
+				groupMarker.removeEventListener('submit', function(event){validform(event); });
+				groupMarker.clearLayers();
+				cliquer()
+			}
+		}
 	}
 
 	if (tableau[3] == 0){ // marqueur basique sans effet 
-		console.log("test1");
+		console.log("test0");
 		groupMarker.addEventListener("click", cliquerbloquer);
 	}
 	if (tableau[3] == 1){ //marqueur bloqué par un autre 
-		console.log("test2")
+		console.log("test1")
 		mark.addEventListener("click", cliquerbloquant);
 	}
 	if (tableau[3] == 2){ // marqueur bloquant l'objet bloqué 
-		console.log("test3");
+		console.log("test2");
 		groupMarker.addEventListener("click", cliquercoder);
 	}
 	if (tableau[3] == 3){ // marqueur bloqué par un code 
+		console.log("test3");
 		mark.addEventListener("click",cliquercodant );
 	}
 	if (tableau[3] == 4){ // marqueur possédant le code du l'objet bloqué 
-
+		console.log("test4");
 		mark.addEventListener("click", cliquer);
 	}
 
