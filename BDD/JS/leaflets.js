@@ -14,6 +14,25 @@ let groupMarker = L.featureGroup();
 objet(i);
 let tableau = [];
 let inventaire = [];
+timer
+var temps=60;
+const timer=document.getElementById("timer");
+setInterval(chronometre,60000);
+function chronometre(){
+	temps --;
+	timer.innerText=temps+" min restantes";
+	
+	fetch('page.php', {
+		method: 'post',
+		body: temps_conc
+	  })
+	if(temps<=0){
+		alert("T'es trop mauvais! Fais mieux la prochaine fois!!!");
+		location.href = "page_accueil_test.html";
+		return;
+	}
+}
+
 
 function objet(i){
 	var data = {"data":1};// but ici (si on fait plusieurs fetch c'est de demander au fichier PHP de renvoyer que ce qui est demandée et pas le reste)
@@ -26,9 +45,10 @@ function objet(i){
 
 			console.log(i, "compteur");
 			if (i == 10){
-				alert("Bien joué !")
-				location.href = "page_accueil_test.html"
-				return 
+
+				alert("Bien joué !");
+				location.href = "page_accueil_test.html";
+				return;
 			}
 			collecte(r[i]);
             
