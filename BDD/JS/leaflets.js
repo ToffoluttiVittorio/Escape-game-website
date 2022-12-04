@@ -14,14 +14,15 @@ let groupMarker = L.featureGroup();
 objet(i);
 let tableau = [];
 let inventaire = [];
-timer
+// timer
 var temps=60;
 const timer=document.getElementById("timer");
 setInterval(chronometre,60000);
 function chronometre(){
 	temps --;
 	timer.innerText=temps+" min restantes";
-	
+	let temps_conc=new FormData();
+	temps_conc.append('temps',temps);
 	fetch('page.php', {
 		method: 'post',
 		body: temps_conc
