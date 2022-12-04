@@ -19,7 +19,7 @@
     </form>
     <br>
     <br>
-    <h2>La liste des 10 meilleurs scores avec le pseudo <?php echo $_COOKIE['LOGGED_USER'];?></h2> 
+    <h2>La liste des 10 meilleurs scores avec le pseudo :</h2> 
     <?php include("../PHP/PHP_tableau_joueur.php"); ?>
 </body>
 <!-- <script src="JS/accueiljs.js"></script> -->

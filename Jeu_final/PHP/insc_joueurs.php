@@ -1,7 +1,7 @@
 <?php 
     include('connect.php');
     $nom_joueur=$_GET['joueur'];
-// retenir l'email de la personne connectée pendant 1 an
+// utilisation du cookie de session (dans le sens où il retient le nom d'utilisateur) pour retenir le nom d'utilisateur, pratique pour bien retenir les gens 
     setcookie(
         'LOGGED_USER',
         $nom_joueur,
