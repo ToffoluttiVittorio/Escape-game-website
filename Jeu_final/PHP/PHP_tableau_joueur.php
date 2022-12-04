@@ -6,7 +6,7 @@
             $tableau[] = $ligne;
         }
         // echo json_encode($tableau);
-        echo "<table>";
+        echo "<table id='tableau_joueur'>";
         echo '<tr>';
         foreach($tableau[0] as $key => $elem){
             // echo "<td>".$key."</td>";

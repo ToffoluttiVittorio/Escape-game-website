@@ -1,0 +1,70 @@
+html,body{
+    height: 100%;
+}
+
+body{
+    background-image: url("../img/arriere_flamme.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} 
+
+h1{
+    font-size: 4.0em;
+    color: indigo;
+    height: 100px;
+} 
+
+h2{
+    font-size: 4.0;
+    color: indigo;
+    height: 20px;
+} 
+
+.bouton {
+    padding: 5px 10px;
+    color: #eee;
+    border-radius: 4px;
+    background-color: #6820D9;
+    background-image: linear-gradient(#AE3AEB, #8429E1 50%, transparent 50%);
+    box-shadow: 0 1px 0 rgba(255,255,255,.1),
+                0 0 1px 1px rgba(255,255,255,.3) inset,
+                0 1px rgba(255,255,255,.4) inset;
+    border: 1px solid black;
+    text-shadow: 0 1px 1px rgba(0,0,0,.8);
+    outline:none;
+}
+
+.bouton:hover,
+.bouton:focus {
+    color: white;
+    background-color: #68209D;
+    box-shadow: 0 1px 0 rgba(255,255,255,.1),
+                0 0 1px 1px rgba(255,255,255,.3) inset,
+                0 1px rgba(255,255,255,.4) inset,
+                0 0 5px rgba(174,58,235,1);
+    border-color: rgba(255, 255, 255, .2);
+}
+
+.bouton:active {
+    background-color: #7424bf;
+    box-shadow: 0 1px 2px rgba(0,0,0,.6) inset,
+                0 1px 0 rgba(255,255,255,.3);
+    border: 1px solid black;
+} 
+
+#tableau_joueur{
+    font-family: Trebuchet MS, Arial, sans-serif; 
+    color: white;
+}
+
+/* .bouton{
+    background-color: black;
+    color: white;
+    height: 50px;
+    width: 200px;
+
+} */
