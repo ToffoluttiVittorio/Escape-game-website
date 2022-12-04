@@ -14,6 +14,7 @@ let groupMarker = L.featureGroup();
 objet(i);
 let tableau = [];
 let inventaire = [];
+
 // timer
 var temps=60;
 const timer=document.getElementById("timer");
@@ -84,11 +85,25 @@ function jeux(tableau){
 		iconSize: [50, 50]
 	});
 
+
 	let mark = L.marker([tableau[1], tableau[2]], {icon: icone}); 
 	mark.addTo(groupMarker);
 
+	function input(tableau){
+		if (tableau[9] != 0){
+			console.count();
+			let inv = document.getElementById("inventaire");
+			let obj = document.createElement('img');
+			obj.type = 'image';
+			obj.src = tableau[9];
+			obj.style = "grid-row: 2/3; width: 11vw; height: 17vh;"
+			inventaire.push("arbre");
+			inv.appendChild(obj);
+		}
+	}
+
 	function cliquer(){
-		console.log("clique");
+		input(tableau);
 		alert(tableau[7]);
 		groupMarker.removeEventListener("click", cliquer);
 		groupMarker.clearLayers();
@@ -98,7 +113,6 @@ function jeux(tableau){
 	}
 
 	function cliquerbloquer(){
-		console.log("cliquerbloquer");
 		alert(tableau[8]);
 		groupMarker.removeEventListener("click", cliquerbloquer);
 		map.removeEventListener("zoom", zoom);
@@ -107,14 +121,13 @@ function jeux(tableau){
 	}
 
 	function cliquerbloquant(){
-		console.log("cliquerbloquant");
+		input(tableau);
 		groupMarker.removeLayer(mark);
 		alert(tableau[8]);
 		groupMarker.addEventListener("click", cliquer)
 	}
 
 	function cliquercoder(){
-		console.log("cliquercoder");
 		groupMarker.removeEventListener("click", cliquercoder);
 		alert(tableau[7]);
 		map.removeEventListener("zoom", zoom);
@@ -123,7 +136,6 @@ function jeux(tableau){
 	}
 
 	function cliquercodant(){
-		console.log("cliquercodant");
 		groupMarker.removeLayer(mark);
 		let popup = document.createElement('div');
 		alert(tableau[8]);
@@ -135,7 +147,6 @@ function jeux(tableau){
 		popup.addEventListener('submit', function(event){validform(event); })
 
 		function validform(e){
-			console.log("relou");
 			e.preventDefault();
 			var code = document.getElementById('code').value;
 			if (code == 2525){
@@ -147,32 +158,25 @@ function jeux(tableau){
 		}
 	}
 
-	if (tableau[3] == 0){ // marqueur basique sans effet 
-		console.log("test0");
+	if (tableau[3] == 0){ 
 		groupMarker.addEventListener("click", cliquerbloquer);
 	}
-	if (tableau[3] == 1){ //marqueur bloqué par un autre 
-		console.log("test1")
+	if (tableau[3] == 1){ 
 		mark.addEventListener("click", cliquerbloquant);
 	}
-	if (tableau[3] == 2){ // marqueur bloquant l'objet bloqué 
-		console.log("test2");
+	if (tableau[3] == 2){ 
 		groupMarker.addEventListener("click", cliquercoder);
 	}
-	if (tableau[3] == 3){ // marqueur bloqué par un code 
-		console.log("test3");
+	if (tableau[3] == 3){ 
 		mark.addEventListener("click",cliquercodant );
 	}
-	if (tableau[3] == 4){ // marqueur possédant le code du l'objet bloqué 
-		console.log("test4");
+	if (tableau[3] == 4){ 
 		mark.addEventListener("click", cliquer);
 	}
 
-
 	map.on("zoom", zoom)
 	function zoom(){
-		console.log(map.getZoom());
-	
+
 		if (map.getZoom() >=6){
 			groupMarker.addTo(map);
 		}
@@ -181,4 +185,5 @@ function jeux(tableau){
 		}
 	}
 }
+
 
