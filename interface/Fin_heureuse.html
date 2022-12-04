@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/acceuilc.css">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css" rel="stylesheet" />
+    <title>Page d'accueil</title>
+</head>
+<body>
+    <h1>VOUS AVEZ GAGNÉ</h1> 
+    <img href="Jeu final/img/Thierry_Henry_MLS_All_Star_2013.jpg">
+    
+    <form action="../BDD/PHP/insc_joueurs.php" method="post">
+        <input type="text" id="joueur" name="joueur">
+        <!-- <a href="leaflet.html"> -->
+            <button class="bouton" type="submit">Jouer</button>
+        <!-- </a> -->
+    </form>
+    <a href="tableau_bord.php">
+        <button class="bouton">Hall of Fame</button>
+     </a>
+</body>
+<script src="JS/accueiljs.js"></script>
+</html>
