@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="css/acceuilc.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css" rel="stylesheet" />
-    <title>Page d'accueil</title>
+    <title>HALL OF FAME</title>
 </head>
 <body>
-    <h1>PATRICK BALKANY'S POV</h1> 
+    <h1>PATRICK BALKANY'S POV : HALL OF FAME</h1> 
     <form action="../BDD/PHP/insc_joueurs.php" method="post">
     </form>
 
