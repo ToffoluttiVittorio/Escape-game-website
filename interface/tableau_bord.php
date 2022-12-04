@@ -12,16 +12,14 @@
 <body>
     <h1>PATRICK BALKANY'S POV</h1> 
     <form action="../BDD/PHP/insc_joueurs.php" method="post">
-        
     </form>
 
     
-    <form action="leaflet.html" method="get">
-        <input type="text" id="joueur" name="joueur">
-        <input id="boutonjouer" class="bouton" type="submit" value="Jouer">
+    <form action="accueil.html" method="get">
+        <input id="boutonjouer" class="bouton" type="submit" value="Retour à l'accueil">
     </form>
     
-    <button id="boutonhall" class="bouton" type="submit" formaction="tableau_bord.php">Hall of fame</button>
+    <?php include("../BDD/PHP/PHP_tableau_joueur.php"); ?>
 </body>
 <script src="JS/accueiljs.js"></script>
 </html>
