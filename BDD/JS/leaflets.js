@@ -184,8 +184,7 @@ function jeux(tableau){
 
 	map.on("zoom", zoom)
 	function zoom(){
-
-		if (map.getZoom() >=6){
+		if (map.getZoom() >=6){ ///le mettre à 15 pour le jeu 
 			groupMarker.addTo(map);
 		}
 		else{

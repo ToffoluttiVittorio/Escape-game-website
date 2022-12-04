@@ -7,26 +7,37 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
-/////////// Initialisation /////////
+/////////// INITIALISATION /////////
 
-let i = 0;
-let groupMarker = L.featureGroup();
-objet(i);
-let tableau = [];
-let inventaire = [];
-// timer
+let i = 0;                          //   inititialisation des étapes du jeu
+let groupMarker = L.featureGroup(); //   groupe de marqueur en variable global 
+let tableau = [];                   //   initialisation du tableau de caractéristique
+let inventaire = [];                //   div de l'inventaire html pour lui ajouter des éléments
+objet(i);                           //   Lancement du jeu 
+
+
+/////////////// TIMER //////////////////////
+
 var temps=60;
 const timer=document.getElementById("timer");
-setInterval(chronometre,60000);
+setInterval(chronometre,5000);
 function chronometre(){
-	temps --;
+
 	timer.innerText=temps+" min restantes";
-	let temps_conc=new FormData();
-	temps_conc.append('temps',temps);
-	fetch('page.php', {
+	var long=Math.ceil(temps/60*1000);
+	temps --;
+	let temps_conc= {"val":long};
+	console.log(JSON.stringify(temps_conc));
+
+	fetch('../PHP/envoyer_score.php', {
 		method: 'post',
-		body: temps_conc
+		body: JSON.stringify(temps_conc)
 	  })
+	// .then(r => r.json())
+	.then(r => {
+		console.log(r)
+	})
+
 	if(temps<=0){
 		alert("T'es trop mauvais! Fais mieux la prochaine fois!!!");
 		location.href = "page_accueil_test.html";
@@ -35,60 +46,65 @@ function chronometre(){
 }
 
 
-function objet(i){
-	var data = {"data":1};// but ici (si on fait plusieurs fetch c'est de demander au fichier PHP de renvoyer que ce qui est demandée et pas le reste)
+////////////////// JEUX ////////////////
+
+function objet(i){           // fonction fetch qui va chercher ligne par ligne (=étape =objet)
+	var data = {"data":1};   // but ici (si on fait plusieurs fetch c'est de demander au fichier PHP de renvoyer que ce qui est demandée et pas le reste)
 	fetch('../PHP/json_point_request.php', {
 		method: 'post',
 		body: JSON.stringify(data)
  	 })
 		.then(r => r.json())
 		.then(r=> {
-
-			console.log(i, "compteur");
-			if (i == 10){
-
+			if (i == 10){                            // fin du jeu si on arive au 10e objet 
 				alert("Bien joué !");
-				location.href = "page_accueil_test.html";
+				location.href = "HTML/Fin_heureuse"; // redirige vers la page de fin 
 				return;
 			}
-			collecte(r[i]);
-            
-				// if (r[i]["popup"]!=""){//test de popup pour voir que cela marche
-				// 	mark.bindPopup(r[i]["popup"]).openPopup();
-					// console.log(r[i]["popup"]);//vérifier que cela marche (j'ai mis un popup à un seul endroit si tu utilises le fichier .sql que je t'ai envoyée (tu peux aussi voir tous les colonnes SQL))
-				}
-				
-			)
+			collecte(r[i]);                          // Suite du jeu 
+        }
+	)
 }
 
-function collecte(r){
+function collecte(r){ // On met les toutes les caractéristiques de l'objet dans un tableau 
 	tableau = [];
-	tableau.push(r["id_objet"]);
-	tableau.push(r["longitude"]);
-	tableau.push(r["latitude"]);
-	tableau.push(r["ID_type"]);
-	tableau.push(r["URL_image"]);
-	tableau.push(r["Code"]);
-	tableau.push(r["objet_suivant"]);
-	tableau.push(r["popup"]);
-	tableau.push(r["popupbis"]);
-	tableau.push(r["objet_inventaire"]);
-	jeux(tableau);
+	tableau.push(r["id_objet"]);  	     // tableau[0] : id de l'objet
+	tableau.push(r["longitude"]);        // tableau[1] : longitude de l'objet
+	tableau.push(r["latitude"]);         // tableau[2] : latitude de l'objet
+	tableau.push(r["ID_type"]);          // tableau[3] : type de l'objet (si bloqué ou codé)
+	tableau.push(r["URL_image"]);        // tableau[4] : url de l'image de l'objet
+	tableau.push(r["Code"]);			 // tableau[5] : code associé si l'objet délivre un code 
+	tableau.push(r["grid_position"]);    // tableau[6] : sa position dans l'inventaire si objet récupérable
+	tableau.push(r["popup"]);            // tableau[7] : le popup associé à l'objet
+	tableau.push(r["popupbis"]);         // tableau[8] : le popup associé à l'objet d'après si bloqué
+	tableau.push(r["objet_inventaire"]); // tableau[9] : url de l'image associé à l'objet récupérable
+	jeux(tableau);                       // Suite du jeu 
 }
 
+function jeux(tableau){   // Associe les différentes fonctions "clique" aux objets
 
-function jeux(tableau){
-	let url = tableau[4];
-	let icone = L.icon({
+	let url = tableau[4]; // url de l'image de l'objet 
+	let icone = L.icon({  // création de l'icone 
 		iconUrl: url,
 		iconSize: [50, 50]
 	});
+	let mark = L.marker([tableau[1], tableau[2]], {icon: icone}); // création du marqueur associé
+	mark.addTo(groupMarker);                                      // on l'ajoute dans le groupMarker
 
-	let mark = L.marker([tableau[1], tableau[2]], {icon: icone}); 
-	mark.addTo(groupMarker);
+	function input(tableau){  // Fonction qui met l'objet dans la div inventaire, si objet récupérable
+		if (tableau[9] != 0){
+			let inv = document.getElementById("inventaire");
+			let obj = document.createElement('img');
+			obj.type = 'image';
+			obj.src = tableau[9];
+			let grid = tableau[6];
+			obj.style = "grid-row: "+grid+"; width: 15vw; height: 15vh;margin-auto;"
+			inventaire.push("arbre");
+			inv.appendChild(obj);
+		}
+	}
 
-	function cliquer(){
-		console.log("clique");
+	function cliquer(){  // fonction clique qui fait passer à l'étape suivante
 		alert(tableau[7]);
 		groupMarker.removeEventListener("click", cliquer);
 		groupMarker.clearLayers();
@@ -97,8 +113,7 @@ function jeux(tableau){
 		objet(i);
 	}
 
-	function cliquerbloquer(){
-		console.log("cliquerbloquer");
+	function cliquerbloquer(){   // Fonction clique pour objet bloqué par un autre objet
 		alert(tableau[8]);
 		groupMarker.removeEventListener("click", cliquerbloquer);
 		map.removeEventListener("zoom", zoom);
@@ -106,15 +121,14 @@ function jeux(tableau){
 		objet(i);
 	}
 
-	function cliquerbloquant(){
-		console.log("cliquerbloquant");
+	function cliquerbloquant(){  // Fonction clique pour objet bloquant un objet bloqué 
+		input(tableau)
 		groupMarker.removeLayer(mark);
 		alert(tableau[8]);
 		groupMarker.addEventListener("click", cliquer)
 	}
 
-	function cliquercoder(){
-		console.log("cliquercoder");
+	function cliquercoder(){	// Fonction clique pour un objet bloqué par un code 
 		groupMarker.removeEventListener("click", cliquercoder);
 		alert(tableau[7]);
 		map.removeEventListener("zoom", zoom);
@@ -122,20 +136,15 @@ function jeux(tableau){
 		objet(i);
 	}
 
-	function cliquercodant(){
-		console.log("cliquercodant");
+	function cliquercodant(){  // Fonction clique pour un objet possédant un code 
 		groupMarker.removeLayer(mark);
 		let popup = document.createElement('div');
 		alert(tableau[8]);
-
 		groupMarker.bindPopup(popup);
-
 		popup.innerHTML = '<div> <p>'+tableau[10]+'</p> <form><p><input type="text" name="code" id="code" placeholder="Trouve le code ..."></p>'
 		+ '<p><input type="submit" value="vérifier" id="ok"></p> </form> </div>';
 		popup.addEventListener('submit', function(event){validform(event); })
-
 		function validform(e){
-			console.log("relou");
 			e.preventDefault();
 			var code = document.getElementById('code').value;
 			if (code == 2525){
@@ -147,33 +156,26 @@ function jeux(tableau){
 		}
 	}
 
-	if (tableau[3] == 0){ // marqueur basique sans effet 
-		console.log("test0");
+								// Liste de if pour associer les fonctions "clique" aux objet 
+	if (tableau[3] == 0){   
 		groupMarker.addEventListener("click", cliquerbloquer);
 	}
-	if (tableau[3] == 1){ //marqueur bloqué par un autre 
-		console.log("test1")
+	if (tableau[3] == 1){ 
 		mark.addEventListener("click", cliquerbloquant);
 	}
-	if (tableau[3] == 2){ // marqueur bloquant l'objet bloqué 
-		console.log("test2");
+	if (tableau[3] == 2){ 
 		groupMarker.addEventListener("click", cliquercoder);
 	}
-	if (tableau[3] == 3){ // marqueur bloqué par un code 
-		console.log("test3");
+	if (tableau[3] == 3){ 
 		mark.addEventListener("click",cliquercodant );
 	}
-	if (tableau[3] == 4){ // marqueur possédant le code du l'objet bloqué 
-		console.log("test4");
+	if (tableau[3] == 4){ 
 		mark.addEventListener("click", cliquer);
 	}
 
-
-	map.on("zoom", zoom)
+	map.on("zoom", zoom) // Fonction zoom associé à la map pour faire apparaître ou non les marqueurs
 	function zoom(){
-		console.log(map.getZoom());
-	
-		if (map.getZoom() >=6){
+		if (map.getZoom() >=6){ ///le mettre à 15 pour le jeu 
 			groupMarker.addTo(map);
 		}
 		else{
@@ -182,3 +184,4 @@ function jeux(tableau){
 	}
 }
 
+// FIN 
