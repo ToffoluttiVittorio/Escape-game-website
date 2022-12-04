@@ -77,7 +77,7 @@ function collecte(r){
 	tableau.push(r["ID_type"]);
 	tableau.push(r["URL_image"]);
 	tableau.push(r["Code"]);
-	tableau.push(r["objet_suivant"]);
+	tableau.push(r["grid_position"]);
 	tableau.push(r["popup"]);
 	tableau.push(r["popupbis"]);
 	tableau.push(r["objet_inventaire"]);
@@ -98,19 +98,20 @@ function jeux(tableau){
 
 	function input(tableau){
 		if (tableau[9] != 0){
-			console.count();
+			console.log("je suis la")
 			let inv = document.getElementById("inventaire");
 			let obj = document.createElement('img');
 			obj.type = 'image';
 			obj.src = tableau[9];
-			obj.style = "grid-row: 2/3; width: 11vw; height: 17vh;"
+			let grid = tableau[6];
+			console.log(grid);
+			obj.style = "grid-row: "+grid+"; width: 15vw; height: 15vh;margin-auto;"
 			inventaire.push("arbre");
 			inv.appendChild(obj);
 		}
 	}
 
 	function cliquer(){
-		input(tableau);
 		alert(tableau[7]);
 		groupMarker.removeEventListener("click", cliquer);
 		groupMarker.clearLayers();
@@ -128,7 +129,7 @@ function jeux(tableau){
 	}
 
 	function cliquerbloquant(){
-		input(tableau);
+		input(tableau)
 		groupMarker.removeLayer(mark);
 		alert(tableau[8]);
 		groupMarker.addEventListener("click", cliquer)

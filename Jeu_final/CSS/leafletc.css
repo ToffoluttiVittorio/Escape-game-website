@@ -23,7 +23,7 @@ body{
     box-sizing: content-box;
     grid-row: 1;
     margin: auto;
-    color: blue;
+    color: black;
     text-align: center;
     border: solid 2px red;
 }
