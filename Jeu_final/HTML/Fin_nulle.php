@@ -10,10 +10,10 @@
     <title>Page d'accueil</title>
 </head>
 <body>
-    <h1>VOUS AVEZ GAGNÉ</h1> 
+    <h1>VOUS AVEZ PERDU, L'ARGENT À ÉTÉ VOLÉE</h1> 
     <img href="../img/pb.jpg">
     
-    <form action="../Jeu_final/accueil.html" method="post">
+    <form action="../accueil.html" method="post">
             <button class="bouton" type="submit">Retourner à la page d'accueil</button>
     </form>
     <a href="tableau_bord.php">
