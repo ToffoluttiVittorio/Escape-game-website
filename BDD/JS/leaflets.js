@@ -53,10 +53,11 @@ function collecte(r){
 
 function jeux(tableau){
 
-	console.log(tableau[4]);
+	let url = tableau[4];
+	console.log(url);
 	let icone = L.icon({
-		iconUrl: "../img/dollar.png",
-		iconSize: [38, 50]
+		iconUrl: url,
+		iconSize: [50, 50]
 	});
 
 	let mark = L.marker([tableau[1], tableau[2]], {icon: icone}); 
@@ -135,7 +136,7 @@ function jeux(tableau){
 		}
 		else{
 	
-		if (map.getZoom() >=6){
+		if (map.getZoom() >=10){
 			groupMarker.addTo(map);
 		}
 		else{
