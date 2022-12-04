@@ -12,7 +12,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let i = 0;
 let groupMarker = L.featureGroup();
 objet(i);
-let tableau = []
+let tableau = [];
+let inventaire = [];
 
 function objet(i){
 	var data = {"data":1};// but ici (si on fait plusieurs fetch c'est de demander au fichier PHP de renvoyer que ce qui est demandée et pas le reste)
@@ -42,100 +43,104 @@ function collecte(r){
 	tableau.push(r["ID_type"]);
 	tableau.push(r["URL_image"]);
 	tableau.push(r["Code"]);
-	tableau.push(r["objet_bloquee"]);
-	jeux(tableau,groupMarker);
+	tableau.push(r["objet_suivant"]);
+	tableau.push(r["popup"]);
+	tableau.push(r["popupbis"]);
+	tableau.push(r["objet_inventaire"]);
+	jeux(tableau);
 }
 
 
-function jeux(tableau, groupMarker){
+function jeux(tableau){
 
+	console.log(tableau[4]);
+	let icone = L.icon({
+		iconUrl: "../img/dollar.png",
+		iconSize: [38, 50]
+	});
 
-	let mark = L.marker([tableau[1], tableau[2]]); ///////// faire icon avec url, opoup et tt ...
+	let mark = L.marker([tableau[1], tableau[2]], {icon: icone}); 
 	mark.addTo(groupMarker);
-	groupMarker.addEventListener("click", cliquer);
 
 	function cliquer(){
-		console.log("clique")
+		console.log("clique");
+		alert(tableau[7]);
 		groupMarker.removeEventListener("click", cliquer);
 		groupMarker.clearLayers();
-		map.removeEventListener("zoom", zoom)
+		map.removeEventListener("zoom", zoom);
 		i = i + 1;
 		objet(i);
 		// document.getElementById("image").src=malika[compteur][1];
-
 	}
 
+	function cliquerbloquer(){
+		console.log("cliquerbloquer");
+		alert(tableau[8]);
+		groupMarker.removeEventListener("click", cliquerbloquer);
+		map.removeEventListener("zoom", zoom);
+		i = i + 1;
+		objet(i);
+	}
+
+	function cliquerbloquant(){
+		console.log("cliquerbloquant");
+		groupMarker.removeLayer(mark);
+		alert(tableau[8]);
+		groupMarker.addEventListener("click", cliquer)
+	}
+
+	function cliquercoder(){
+		console.log("cliquercoder");
+		groupMarker.removeEventListener("click", cliquercoder);
+		alert(tableau[7]);
+		map.removeEventListener("zoom", zoom);
+		i = i + 1;
+		objet(i);
+	}
+
+	function cliquercodant(){
+		console.log("cliquercodant");
+		groupMarker.removeLayer(mark);
+		alert(tableau[8]);
+		groupMarker.addEventListener("click", cliquer)
+	}
+
+	if (tableau[3] == 0){ // marqueur basique sans effet 
+		console.log("test1");
+		groupMarker.addEventListener("click", cliquerbloquer);
+	}
+	if (tableau[3] == 1){ //marqueur bloqué par un autre 
+		console.log("test2")
+		mark.addEventListener("click", cliquerbloquant);
+	}
+	if (tableau[3] == 2){ // marqueur bloquant l'objet bloqué 
+		console.log("test3");
+		groupMarker.addEventListener("click", cliquercoder);
+	}
+	if (tableau[3] == 3){ // marqueur bloqué par un code 
+		mark.addEventListener("click",cliquercodant );
+	}
+	if (tableau[3] == 4){ // marqueur possédant le code du l'objet bloqué 
+		mark.addEventListener("click", cliquer);
+	}
+
+
 	map.on("zoom", zoom)
-
 	function zoom(){
-
 		console.log(map.getZoom());
-		console.log(tableau);
-		// if(tableau["id_objet"] == 2){ // Si le jeu est finis 
-		//     console.log("Le jeu est finito");
-		//     return
-		// }
-		// else{
-	
-		if (map.getZoom() >=6){
-			groupMarker.addLayer(mark);
-			groupMarker.addTo(map);
-			groupMarker.removeEventListener("click", cliquer);
 
-	
-			if (tableau[5] == 0){ // objet récupérable ou non 
-				console.log("test1");
-
-				groupMarker.addEventListener("click", cliquer);
-
-
-				
-			}
-			else if (tableau[5] == 1){ // objet bloqué par un code
-				console.log("test2");
-				groupMarker.on("click",cliquercode);
-			}
-			else if (tableau[5] == 2){ // objet bloqué par un autre objet 
-				console.log("test3");
-				groupMarker.on("click",cliquerbloquer);
-	
-			}
+		if(tableau[0] == 10){ // Si le jeu est finis 
+		    console.log("Le jeu est finito");
+		    return //mettre la page de fin ici 
 		}
 		else{
-			groupMarker.clearLayers();
+	
+		if (map.getZoom() >=6){
+			groupMarker.addTo(map);
+		}
+		else{
+			map.removeLayer(groupMarker);
 		}
 	}
 }
-
-
-
-
-// function cliquercode(){
-// 	console.log("cliquercode");
-
-//     // document.getElementById("image").src=malika[compteur][1];
-//     // group.clearLayers();
-//     // mark.removeEventListener("click",cliquercode);
-//     // compteur ++;
-// }
-
-// function cliquerbloquer(){
-// 	console.log("cliquerbloquer");
-// 	let tableaubis = [];
-// 	tableaubis.push(r["id_objet"]);
-// 	tableaubis.push(r["longitude"]);
-// 	tableaubis.push(r["latitude"]);
-// 	tableaubis.push(r["ID_type"]);
-// 	tableaubis.push(r["URL_image"]);
-// 	tableaubis.push(r["Code"]);
-// 	tableaubis.push(r["objet_bloquee"]);
-// 	objet(tableau[6]);
-// }
-
-// function cliquer2(){
-// 	console.log("je rentre dans cliquer 2")
-// 	groupMarker.removeLayer(markbis);
-// 	mark.on("click",cliquer);
-// }
-
-
+}
