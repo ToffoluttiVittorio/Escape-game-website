@@ -10,5 +10,5 @@
     );
     mysqli_query($link, "INSERT INTO nom_joueur VALUES ('".$nom_joueur."',0)");
     echo $nom_joueur;
-    header('Location:http://localhost/BDD/HTML/leaflet.html');
+    header('Location:http://localhost/Jeu_final/HTML/leaflet.html');
 ?>

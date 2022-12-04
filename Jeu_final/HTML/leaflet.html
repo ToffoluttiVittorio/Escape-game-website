@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
-     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
-     crossorigin=""/>
-     <link rel="preconnect" href="https://fonts.bunny.net">
-     <link href="https://fonts.bunny.net/css" rel="stylesheet" />
-     <link rel="stylesheet" href="css/leafletc.css">
-    <title>JEUX DE BITTO</title>
-</head>
-<body>
-    <div id="map"></div>
-    <div id="inventaire">
-        <header id="titre">INVENTAIRE</header>
-        <img id="image" src="img/pb.jpg"></img>
-        <img id="objet" src=""></img>
-    </div>
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
-     integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
-     crossorigin=""></script>
-     <script src="js/mort.js"></script>
-</body>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Escape Game</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin=""></script>
+        <link rel="stylesheet" href="../CSS/leaflets.css">
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <div id="inventaire">
+            <header id="titre">INVENTAIRE</header>
+            <div id="timer">
+                60 min restantes
+            </div>
+        </div>
+            
+    </body> <!-- Je souhaite faire une chose simple pour qu'après on ait un truc qui soit modifiable facilement après -->
+    <script src="../JS/leaflets.js"></script>
 </html>
