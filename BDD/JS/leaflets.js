@@ -25,6 +25,11 @@ function objet(i){
 		.then(r=> {
 
 			console.log(i, "compteur");
+			if (i == 10){
+				alert("Bien joué !")
+				location.href = "page_accueil_test.html"
+				return 
+			}
 			collecte(r[i]);
             
 				// if (r[i]["popup"]!=""){//test de popup pour voir que cela marche
@@ -53,10 +58,11 @@ function collecte(r){
 
 function jeux(tableau){
 
-	console.log(tableau[4]);
+	let url = tableau[4];
+	console.log(url);
 	let icone = L.icon({
-		iconUrl: "../img/dollar.png",
-		iconSize: [38, 50]
+		iconUrl: url,
+		iconSize: [50, 50]
 	});
 
 	let mark = L.marker([tableau[1], tableau[2]], {icon: icone}); 
@@ -69,6 +75,7 @@ function jeux(tableau){
 		groupMarker.clearLayers();
 		map.removeEventListener("zoom", zoom);
 		i = i + 1;
+
 		objet(i);
 		// document.getElementById("image").src=malika[compteur][1];
 	}
@@ -121,6 +128,7 @@ function jeux(tableau){
 		mark.addEventListener("click",cliquercodant );
 	}
 	if (tableau[3] == 4){ // marqueur possédant le code du l'objet bloqué 
+
 		mark.addEventListener("click", cliquer);
 	}
 
@@ -128,12 +136,6 @@ function jeux(tableau){
 	map.on("zoom", zoom)
 	function zoom(){
 		console.log(map.getZoom());
-
-		if(tableau[0] == 10){ // Si le jeu est finis 
-		    console.log("Le jeu est finito");
-		    return //mettre la page de fin ici 
-		}
-		else{
 	
 		if (map.getZoom() >=6){
 			groupMarker.addTo(map);
@@ -143,4 +145,4 @@ function jeux(tableau){
 		}
 	}
 }
-}
+
