@@ -14,19 +14,27 @@ let groupMarker = L.featureGroup();
 objet(i);
 let tableau = [];
 let inventaire = [];
+
+
+
 // timer
 var temps=60;
 const timer=document.getElementById("timer");
-setInterval(chronometre,60000);
+setInterval(chronometre,5000);
 function chronometre(){
-	temps --;
 	timer.innerText=temps+" min restantes";
-	let temps_conc=new FormData();
-	temps_conc.append('temps',temps);
-	fetch('page.php', {
+	var long=Math.ceil(temps/60*1000);
+	temps --;
+	let temps_conc= {"val":long};
+	console.log(JSON.stringify(temps_conc));
+	fetch('../PHP/envoyer_score.php', {
 		method: 'post',
-		body: temps_conc
+		body: JSON.stringify(temps_conc)
 	  })
+	// .then(r => r.json())
+	.then(r => {
+		console.log(r)
+	})
 	if(temps<=0){
 		alert("T'es trop mauvais! Fais mieux la prochaine fois!!!");
 		location.href = "page_accueil_test.html";
@@ -43,7 +51,7 @@ function objet(i){
  	 })
 		.then(r => r.json())
 		.then(r=> {
-
+			// console.log(r);
 			console.log(i, "compteur");
 			if (i == 10){
 

@@ -1,5 +1,6 @@
 <?php
     include('connect.php');
+
     $tableau = [];
     $tablo_joueur=mysqli_query($link,"SELECT * FROM nom_joueur ORDER BY score DESC LIMIT 10");
     while($ligne = mysqli_fetch_assoc($tablo_joueur)){

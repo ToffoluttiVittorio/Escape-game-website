@@ -13,14 +13,14 @@
     <h1>PATRICK BALKANY'S POV : HALL OF FAME</h1> 
     <form action="../BDD/PHP/insc_joueurs.php" method="post">
     </form>
-
+    
     <form action="../accueil.html" method="get">
         <input id="boutonjouer" class="bouton" type="submit" value="Retour à l'accueil">
     </form>
     <br>
     <br>
-    <h2>La liste des 10 meilleurs scores avec le pseudo</h2> 
+    <h2>La liste des 10 meilleurs scores avec le pseudo <?php echo $_COOKIE['LOGGED_USER'];?></h2> 
     <?php include("../PHP/PHP_tableau_joueur.php"); ?>
 </body>
-<script src="JS/accueiljs.js"></script>
+<!-- <script src="JS/accueiljs.js"></script> -->
 </html>
