@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 04, 2022 at 10:33 PM
+-- Generation Time: Dec 05, 2022 at 12:09 AM
 -- Server version: 5.7.24
--- PHP Version: 8.0.1
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -20,6 +21,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `escapegame`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nom_joueur`
+--
+
+CREATE TABLE `nom_joueur` (
+  `id_joueur` varchar(255) DEFAULT NULL,
+  `score` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `nom_joueur`
+--
+
+INSERT INTO `nom_joueur` (`id_joueur`, `score`) VALUES
+('f', 0);
 
 -- --------------------------------------------------------
 
