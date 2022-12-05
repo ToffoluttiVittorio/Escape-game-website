@@ -20,12 +20,11 @@ objet(i);                           //   Lancement du jeu
 
 var temps=20; //point de départ du timer, afin de pouvoir mettre en place le timer par la suite
 const timer=document.getElementById("timer");//on utilise le DOM pour éditer la valeur du texte de la div en HTML
-setInterval(chronometre,60000);// fonction pratique pour faire des boucles toute les minutes jusqu'à zero
+setInterval(chronometre,1000);// fonction pratique pour faire des boucles toute les minutes jusqu'à zero
 function chronometre(){//fonction utilisé par setinterval
 	temps --;//on diminue à chaque minutes de 1 min
 	timer.innerText=temps+" min restantes";//edit du texte affiché 
 	var long=Math.ceil(temps/20*1000);// On calcule le score en regarsant le temps mis en place
-	
 	let temps_conc= {"val":long};//on définit la variable pour faire le fetch (on fetch toute les minutes pour stocker la valeur, c'était la méthode la + simple, sinon on aurait pu faire autre chose mais j'avais pas d'idée)
 
 	fetch('../PHP/envoyer_score.php', {//le fetch qui permet de mettre à jour en direct le score (je trouve ça lourd mais c'est fonctionnelle, à ne pas refaire)
@@ -34,10 +33,10 @@ function chronometre(){//fonction utilisé par setinterval
 	  })
 	// .then(r => r.json())
 	.then(r => {
-		console.log(r)
+		console.log(r);
 	})//promise obligatoire pour faire marcher le fetch
 
-	if(temps=0){//pour faire finir le jeu si jamais ça a mal fini
+	if(temps==0){//pour faire finir le jeu si jamais ça a mal fini
 		alert("T'es trop mauvais! Fais mieux la prochaine fois!!!");
 		location.href = "../HTML/Fin_nulle.html";//redirige vers la page où tout se finit mal
 		return;
