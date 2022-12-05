@@ -1,6 +1,6 @@
 /////////////// MAP//////////////////
 
-var map = L.map('map').setView([48.900002, 2.28333], 5);
+var map = L.map('map').setView([48.892684, 2.287328], 10);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -14,7 +14,7 @@ let groupMarker = L.featureGroup(); //   groupe de marqueur en variable global
 let tableau = [];                   //   initialisation du tableau de caractéristique
 let inventaire = [];                //   div de l'inventaire html pour lui ajouter des éléments
 objet(i);                           //   Lancement du jeu 
-
+let msg = "Vous vous réveiller sur le bureau de la mairie après avoir festoyé bien généreusement avec l'argent des impôts. Allez donc prendre un café dans le bar du coin pour connaitre les nouvelles affaires."                          
 
 /////////////// TIMER //////////////////////
 
@@ -54,6 +54,9 @@ function objet(i){           // fonction fetch qui va chercher ligne par ligne (
  	 })
 		.then(r => r.json())
 		.then(r=> {
+			if (i === 0){
+				alert(msg)
+			}
 			if (i == 10){                            // fin du jeu si on arive au 10e objet 
 				alert("Bien joué !");
 				location.href = "../HTML/Fin_heureuse.html"; // redirige vers la page de fin 
