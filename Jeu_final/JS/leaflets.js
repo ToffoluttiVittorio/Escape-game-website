@@ -174,7 +174,7 @@ function jeux(tableau){   // Associe les différentes fonctions "clique" aux obj
 
 	map.on("zoom", zoom) // Fonction zoom associé à la map pour faire apparaître ou non les marqueurs
 	function zoom(){
-		if (map.getZoom() >=6){ ///le mettre à 15 pour le jeu 
+		if (map.getZoom() >=6){ ///le mettre à 15 pour le jeu, 6 pour que ce soit plus rapide
 			groupMarker.addTo(map);
 		}
 		else{
