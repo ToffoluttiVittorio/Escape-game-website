@@ -20,7 +20,7 @@ let msg = "Vous vous réveiller sur le bureau de la mairie après avoir festoyé
 
 var temps=20; //point de départ du timer, afin de pouvoir mettre en place le timer par la suite
 const timer=document.getElementById("timer");//on utilise le DOM pour éditer la valeur du texte de la div en HTML
-setInterval(chronometre,1000);// fonction pratique pour faire des boucles toute les minutes jusqu'à zero
+setInterval(chronometre,60000);// fonction pratique pour faire des boucles toute les minutes jusqu'à zero
 function chronometre(){//fonction utilisé par setinterval
 	temps --;//on diminue à chaque minutes de 1 min
 	timer.innerText=temps+" min restantes";//edit du texte affiché 
