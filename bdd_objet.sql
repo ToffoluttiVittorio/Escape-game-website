@@ -20,7 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `escapegame`
 --
+-- --------------------------------------------------------
 
+--
+-- Table structure for table `nom_joueur`
+--
+
+CREATE TABLE `nom_joueur` (
+  `id_joueur` varchar(255) DEFAULT NULL,
+  `score` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `nom_joueur`
+--
+
+INSERT INTO `nom_joueur` (`id_joueur`, `score`) VALUES
+('f', 0);
+
+-- --------------------------------------------------------
 -- --------------------------------------------------------
 
 --
